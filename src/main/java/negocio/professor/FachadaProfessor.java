@@ -1,5 +1,6 @@
 package negocio.professor;
 
+import dados.excecoes.VoceJadaEssaDisciplina;
 import negocio.excecoes.ProfessorInexistenteException;
 import negocio.excecoes.ProfessorJaCadastradoException;
 import negocio.interf.IFachadaProfessor;
@@ -27,7 +28,7 @@ public class FachadaProfessor implements IFachadaProfessor {
     }
 
     @Override
-    public void editarDisciplinadoProfessor(Professor professor, ArrayList<Disciplina> disciplina) throws ProfessorInexistenteException {
+    public void editarDisciplinadoProfessor(Professor professor, Disciplina disciplina) throws ProfessorInexistenteException, VoceJadaEssaDisciplina {
         this.controladorProfessor.editarDisciplinadoProfessor(professor, disciplina);
     }
 
@@ -40,4 +41,15 @@ public class FachadaProfessor implements IFachadaProfessor {
     public Professor buscarProfessor(String id) throws ProfessorInexistenteException {
         return this.controladorProfessor.buscarProfessor(id);
     }
+
+    @Override
+    public boolean verificarExitenciadeID(String id) {
+        return this.controladorProfessor.verificarExitenciadeID(id);
+    }
+
+    @Override
+    public void exibirListaProfessor() {
+        this.controladorProfessor.exibirListaProfessor();
+    }
+
 }

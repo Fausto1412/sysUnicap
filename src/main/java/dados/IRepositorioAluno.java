@@ -19,5 +19,5 @@ public interface IRepositorioAluno {
 
   public void editarCursodoAluno(Aluno aluno, Curso curso) throws AlunoInexistenteException;
 
-
+  public void exibirListaAluno();
 }

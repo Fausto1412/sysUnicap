@@ -37,4 +37,14 @@ public class FachadaAluno implements IFachadaAluno {
   public void editarCursodoAluno(Aluno aluno, Curso curso) throws AlunoInexistenteException {
     this.controladorAluno.editarCursodoAluno(aluno, curso);
   }
+
+  @Override
+  public boolean verificarExitenciadeMatricula(String matricula) {
+    return this.controladorAluno.verificarExitenciadeMatricula(matricula);
+  }
+
+  @Override
+  public void exibirListaAluno(){
+    this.controladorAluno.exibirListaAluno();
+  }
 }

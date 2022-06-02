@@ -3,6 +3,8 @@ package dados.aluno;
 import dados.IRepositorioAluno;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
+
 import negocio.aluno.entidade.Aluno;
 import negocio.aluno.entidade.Curso;
 import negocio.excecoes.AlunoInexistenteException;
@@ -27,7 +29,7 @@ public class RepositorioAluno implements IRepositorioAluno {
   @Override
   public boolean verificarExistenciaAluno(String matricula) {
     for(Aluno aluno: this.alunos){
-      if(aluno.getMatricula() == matricula){
+      if(aluno.getMatricula().equals(matricula)){
         return true;
       }
     }
@@ -37,7 +39,7 @@ public class RepositorioAluno implements IRepositorioAluno {
   @Override
   public Aluno buscarAluno(String matricula) throws AlunoInexistenteException {
     for(Aluno aluno: this.alunos){
-      if(aluno.getMatricula() == matricula){
+      if(aluno.getMatricula().equals(matricula)){
         return aluno;
       }
     }
@@ -69,6 +71,12 @@ public class RepositorioAluno implements IRepositorioAluno {
     } else {
       throw new AlunoInexistenteException();
     }
+  }
+
+  @Override
+  public void exibirListaAluno() {
+    Stream<List<Aluno>> stream = Stream.of(alunos);
+    stream.forEach(alunos1 -> System.out.println(alunos));
   }
 
 }

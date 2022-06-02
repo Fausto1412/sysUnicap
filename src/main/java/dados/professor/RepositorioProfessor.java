@@ -1,6 +1,7 @@
 package dados.professor;
 
 import dados.IRepositorioProfessor;
+import dados.excecoes.VoceJadaEssaDisciplina;
 import negocio.professor.entidade.Professor;
 import negocio.excecoes.ProfessorInexistenteException;
 import negocio.excecoes.ProfessorJaCadastradoException;
@@ -8,6 +9,7 @@ import negocio.professor.entidade.Disciplina;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class RepositorioProfessor implements IRepositorioProfessor {
 
@@ -29,7 +31,7 @@ public class RepositorioProfessor implements IRepositorioProfessor {
     @Override
     public boolean verificarExistenciaProfessor(String id) {
         for(Professor professor: this.professores){
-            if(professor.getID() == id){
+            if(professor.getID().equals(id)){
                 return true;
             }
         }
@@ -39,7 +41,7 @@ public class RepositorioProfessor implements IRepositorioProfessor {
     @Override
     public Professor buscarProfessor(String id) throws ProfessorInexistenteException {
         for(Professor professor: this.professores){
-            if(professor.getID() == id){
+            if(professor.getID().equals(id)){
                 return professor;
             }
         }
@@ -68,12 +70,22 @@ public class RepositorioProfessor implements IRepositorioProfessor {
     }
 
     @Override
-    public void editarDisciplinadoProfessor(Professor professor, ArrayList<Disciplina> disciplina) throws ProfessorInexistenteException {
+    public void editarDisciplinadoProfessor(Professor professor, Disciplina disciplina) throws ProfessorInexistenteException, VoceJadaEssaDisciplina {
         if(this.professores.contains(professor)){
-            professor.setDisciplina(disciplina);
+            if(this.professores.contains(professor)){
+                professor.setDisciplina(disciplina);
+            }
+            else {
+                throw new VoceJadaEssaDisciplina();
+            }
         }
         else {
             throw new ProfessorInexistenteException();
         }
+    }
+
+    @Override
+    public void exibirListaProfessor() {
+        professores.forEach((professor -> System.out.println("\n"+professor)));
     }
 }

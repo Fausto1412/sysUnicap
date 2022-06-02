@@ -34,4 +34,10 @@ public class Aluno {
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Nome do Aluno %s, matricula %s faz curso de %s", this.getNome(), this.getMatricula(), this.getCurso()) ;
+    }
+
 }

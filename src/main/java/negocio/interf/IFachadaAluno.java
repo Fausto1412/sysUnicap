@@ -17,4 +17,7 @@ public interface IFachadaAluno {
 
   public void editarCursodoAluno(Aluno aluno, Curso curso) throws AlunoInexistenteException;
 
+  public boolean verificarExitenciadeMatricula(String matricula);
+
+  public void exibirListaAluno();
 }
